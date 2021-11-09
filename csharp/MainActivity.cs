@@ -10,7 +10,7 @@ public class MainActivity : Activity
         // Set our view from the "main" layout resource
         SetContentView(Resource.Layout.activity_main);
 
-        var success = await Task.Factory.StartNew (BenchmarkInstrumentation.Run);
-        FinishActivity(success ? (int)Result.Ok : (int)Result.Canceled);
+        await Task.Factory.StartNew (BenchmarkInstrumentation.Run);
+        Finish();
     }
 }

@@ -19,6 +19,7 @@
     <Using Include="BenchmarkDotNet.Exporters" />
     <Using Include="BenchmarkDotNet.Jobs" />
     <Using Include="BenchmarkDotNet.Loggers" />
+    <Using Include="BenchmarkDotNet.Order" />
     <Using Include="BenchmarkDotNet.Running" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
     <None Remove="@(None->WithMetadataValue('Extension', '.dll'))" />
