@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import org.junit.runner.RunWith;
@@ -93,6 +95,50 @@ public class DotNetPipeTests {
 	}
 
 	@Test
+	public void canSendTextView_Gravity() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_GRAVITY,
+				textView,
+				Gravity.CENTER,
+		});
+
+		verify(textView).setGravity(Gravity.CENTER);
+	}
+
+	@Test
+	public void canSendTextView_SingleLine() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_SINGLE_LINE,
+				textView,
+				true,
+		});
+
+		verify(textView).setSingleLine(true);
+	}
+
+	@Test
+	public void canSendTextView_MaxLines() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_MAX_LINES,
+				textView,
+				2222,
+		});
+
+		verify(textView).setMaxLines(2222);
+	}
+
+	@Test
+	public void canSendTextView_Ellipsize() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_ELLIPSIZE,
+				textView,
+				TextUtils.TruncateAt.MIDDLE,
+		});
+
+		verify(textView).setEllipsize(TextUtils.TruncateAt.MIDDLE);
+	}
+
+	@Test
 	public void canSendTextView_EveryProperty() {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
@@ -119,6 +165,22 @@ public class DotNetPipeTests {
 				DotNetPipe.TEXTVIEW_TEXT_ALIGNMENT,
 				textView,
 				View.TEXT_ALIGNMENT_CENTER,
+
+				DotNetPipe.TEXTVIEW_GRAVITY,
+				textView,
+				Gravity.CENTER,
+
+				DotNetPipe.TEXTVIEW_SINGLE_LINE,
+				textView,
+				true,
+
+				DotNetPipe.TEXTVIEW_MAX_LINES,
+				textView,
+				2222,
+
+				DotNetPipe.TEXTVIEW_ELLIPSIZE,
+				textView,
+				TextUtils.TruncateAt.MIDDLE,
 		});
 
 		verify(textView).setText("foo");
@@ -127,5 +189,9 @@ public class DotNetPipeTests {
 		verify(textView).setTextColor(Color.BLUE);
 		verify(textView).setLetterSpacing(99.5f);
 		verify(textView).setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+		verify(textView).setGravity(Gravity.CENTER);
+		verify(textView).setSingleLine(true);
+		verify(textView).setMaxLines(2222);
+		verify(textView).setEllipsize(TextUtils.TruncateAt.MIDDLE);
 	}
 }
