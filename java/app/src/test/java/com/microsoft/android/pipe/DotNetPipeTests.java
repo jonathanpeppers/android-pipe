@@ -26,14 +26,13 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendEmpty() {
-		DotNetPipe.Send(new Object[0]);
+		DotNetPipe.Send(null, new Object[0]);
 	}
 
 	@Test
 	public void canSendTextView_Text() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
-				textView,
 				"foo",
 		});
 
@@ -42,9 +41,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_Typeface() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TYPEFACE,
-				textView,
 				typeface,
 		});
 
@@ -53,9 +51,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_TextSize() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT_SIZE,
-				textView,
 				22, 2.5f,
 		});
 
@@ -64,9 +61,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_TextColor() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT_COLOR,
-				textView,
 				Color.BLUE,
 		});
 
@@ -75,9 +71,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_LetterSpacing() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_LETTER_SPACING,
-				textView,
 				99.5f,
 		});
 
@@ -86,9 +81,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_TextAlignment() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT_ALIGNMENT,
-				textView,
 				View.TEXT_ALIGNMENT_CENTER,
 		});
 
@@ -97,9 +91,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_Gravity() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_GRAVITY,
-				textView,
 				Gravity.CENTER,
 		});
 
@@ -108,9 +101,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_SingleLine() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_SINGLE_LINE,
-				textView,
 				true,
 		});
 
@@ -119,9 +111,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_MaxLines() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_MAX_LINES,
-				textView,
 				2222,
 		});
 
@@ -130,9 +121,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_Ellipsize() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_ELLIPSIZE,
-				textView,
 				TextUtils.TruncateAt.MIDDLE,
 		});
 
@@ -141,9 +131,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_Padding() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_PADDING,
-				textView,
 				1, 2, 3, 4,
 		});
 
@@ -152,9 +141,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_PaintFlags() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_PAINT_FLAGS,
-				textView,
 				Paint.STRIKE_THRU_TEXT_FLAG,
 		});
 
@@ -163,9 +151,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_LineSpacing() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_LINE_SPACING,
-				textView,
 				300f, 400f,
 		});
 
@@ -174,9 +161,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_LayoutDirection() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_LAYOUT_DIRECTION,
-				textView,
 				LayoutDirection.INHERIT,
 		});
 
@@ -185,9 +171,8 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_TextDirection() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT_DIRECTION,
-				textView,
 				View.LAYOUT_DIRECTION_RTL,
 		});
 
@@ -196,65 +181,50 @@ public class DotNetPipeTests {
 
 	@Test
 	public void canSendTextView_EveryProperty() {
-		DotNetPipe.Send(new Object[] {
+		DotNetPipe.Send(textView, new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
-				textView,
 				"foo",
 
 				DotNetPipe.TEXTVIEW_TYPEFACE,
-				textView,
 				typeface,
 
 				DotNetPipe.TEXTVIEW_TEXT_SIZE,
-				textView,
 				22, 2.5f,
 
 				DotNetPipe.TEXTVIEW_TEXT_COLOR,
-				textView,
 				Color.BLUE,
 
 				DotNetPipe.TEXTVIEW_LETTER_SPACING,
-				textView,
 				99.5f,
 
 				DotNetPipe.TEXTVIEW_TEXT_ALIGNMENT,
-				textView,
 				View.TEXT_ALIGNMENT_CENTER,
 
 				DotNetPipe.TEXTVIEW_GRAVITY,
-				textView,
 				Gravity.CENTER,
 
 				DotNetPipe.TEXTVIEW_SINGLE_LINE,
-				textView,
 				true,
 
 				DotNetPipe.TEXTVIEW_MAX_LINES,
-				textView,
 				2222,
 
 				DotNetPipe.TEXTVIEW_ELLIPSIZE,
-				textView,
 				TextUtils.TruncateAt.MIDDLE,
 
 				DotNetPipe.TEXTVIEW_PADDING,
-				textView,
 				1, 2, 3, 4,
 
 				DotNetPipe.TEXTVIEW_PAINT_FLAGS,
-				textView,
 				Paint.STRIKE_THRU_TEXT_FLAG,
 
 				DotNetPipe.TEXTVIEW_LINE_SPACING,
-				textView,
 				300f, 400f,
 
 				DotNetPipe.TEXTVIEW_LAYOUT_DIRECTION,
-				textView,
 				LayoutDirection.INHERIT,
 
 				DotNetPipe.TEXTVIEW_TEXT_DIRECTION,
-				textView,
 				View.LAYOUT_DIRECTION_RTL,
 		});
 

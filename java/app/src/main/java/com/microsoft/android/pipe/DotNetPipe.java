@@ -23,64 +23,63 @@ public class DotNetPipe {
 	public final static int TEXTVIEW_LAYOUT_DIRECTION = 14;
 	public final static int TEXTVIEW_TEXT_DIRECTION = 15;
 
-	public static void Send (Object[] message) {
-		int messageId;
-		for (int i = 0; i < message.length;) {
-			messageId = (int)message[i];
-			if (messageId == TEXTVIEW_TEXT) {
-				getTextView(message, i).setText((String)message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_TYPEFACE) {
-				getTextView(message, i).setTypeface((Typeface) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_TEXT_COLOR) {
-				getTextView(message, i).setTextColor((int) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_TEXT_SIZE) {
-				getTextView(message, i).setTextSize((int) message[i + 2], (float) message[i + 3]);
-				i += 4;
-			} else if (messageId == TEXTVIEW_LETTER_SPACING) {
-				getTextView(message, i).setLetterSpacing((float) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_TEXT_ALIGNMENT) {
-				getTextView(message, i).setTextAlignment((int) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_GRAVITY) {
-				getTextView(message, i).setGravity((int) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_SINGLE_LINE) {
-				getTextView(message, i).setSingleLine ((boolean) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_MAX_LINES) {
-				getTextView(message, i).setMaxLines ((int) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_ELLIPSIZE) {
-				getTextView(message, i).setEllipsize ((TextUtils.TruncateAt) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_PADDING) {
-				getTextView(message, i).setPadding ((int) message[i + 2], (int) message[i + 3], (int) message[i + 4], (int) message[i + 5]);
-				i += 6;
-			} else if (messageId == TEXTVIEW_PAINT_FLAGS) {
-				getTextView(message, i).setPaintFlags ((int) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_LINE_SPACING) {
-				getTextView(message, i).setLineSpacing((float) message[i + 2], (float) message[i + 3]);
-				i += 4;
-			} else if (messageId == TEXTVIEW_LAYOUT_DIRECTION) {
-				getTextView(message, i).setLayoutDirection((int) message[i + 2]);
-				i += 3;
-			} else if (messageId == TEXTVIEW_TEXT_DIRECTION) {
-				getTextView(message, i).setTextDirection((int) message[i + 2]);
-				i += 3;
-			} else {
-				// Assume unknown messages of size 3
-				i += 3;
-			}
-		}
+	public static void Send (TextView view, Object[] message) {
+		Send (view, message, message.length);
 	}
 
-	private static TextView getTextView(Object[] message, int i)
-	{
-		return ((TextView)message[i + 1]);
+	public static void Send (TextView view, Object[] message, int length) {
+		int messageId;
+		for (int i = 0; i < length;) {
+			messageId = (int)message[i];
+			if (messageId == TEXTVIEW_TEXT) {
+				view.setText((String)message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_TYPEFACE) {
+				view.setTypeface((Typeface) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_TEXT_COLOR) {
+				view.setTextColor((int) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_TEXT_SIZE) {
+				view.setTextSize((int) message[i + 1], (float) message[i + 2]);
+				i += 3;
+			} else if (messageId == TEXTVIEW_LETTER_SPACING) {
+				view.setLetterSpacing((float) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_TEXT_ALIGNMENT) {
+				view.setTextAlignment((int) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_GRAVITY) {
+				view.setGravity((int) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_SINGLE_LINE) {
+				view.setSingleLine ((boolean) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_MAX_LINES) {
+				view.setMaxLines ((int) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_ELLIPSIZE) {
+				view.setEllipsize ((TextUtils.TruncateAt) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_PADDING) {
+				view.setPadding ((int) message[i + 1], (int) message[i + 2], (int) message[i + 3], (int) message[i + 4]);
+				i += 5;
+			} else if (messageId == TEXTVIEW_PAINT_FLAGS) {
+				view.setPaintFlags ((int) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_LINE_SPACING) {
+				view.setLineSpacing((float) message[i + 1], (float) message[i + 2]);
+				i += 3;
+			} else if (messageId == TEXTVIEW_LAYOUT_DIRECTION) {
+				view.setLayoutDirection((int) message[i + 1]);
+				i += 2;
+			} else if (messageId == TEXTVIEW_TEXT_DIRECTION) {
+				view.setTextDirection((int) message[i + 1]);
+				i += 2;
+			} else {
+				// Assume unknown messages of size 2
+				i += 2;
+			}
+		}
 	}
 }
