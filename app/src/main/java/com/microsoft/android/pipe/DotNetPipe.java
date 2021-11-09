@@ -17,6 +17,8 @@ public class DotNetPipe {
 	public final static int TEXTVIEW_SINGLE_LINE = 8;
 	public final static int TEXTVIEW_MAX_LINES = 9;
 	public final static int TEXTVIEW_ELLIPSIZE = 10;
+	public final static int TEXTVIEW_PADDING = 11;
+	public final static int TEXTVIEW_PAINT_FLAGS = 12;
 
 	public static void Send (Object[] message) {
 		int messageId;
@@ -51,6 +53,12 @@ public class DotNetPipe {
 				i += 3;
 			} else if (messageId == TEXTVIEW_ELLIPSIZE) {
 				getTextView(message, i).setEllipsize ((TextUtils.TruncateAt) message[i + 2]);
+				i += 3;
+			} else if (messageId == TEXTVIEW_PADDING) {
+				getTextView(message, i).setPadding ((int) message[i + 2], (int) message[i + 3], (int) message[i + 4], (int) message[i + 5]);
+				i += 6;
+			} else if (messageId == TEXTVIEW_PAINT_FLAGS) {
+				getTextView(message, i).setPaintFlags ((int) message[i + 2]);
 				i += 3;
 			} else {
 				// Assume unknown messages of size 3

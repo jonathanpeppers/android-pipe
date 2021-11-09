@@ -3,6 +3,7 @@ package com.microsoft.android.pipe;
 import org.junit.Test;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -32,7 +33,7 @@ public class DotNetPipeTests {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
 				textView,
-				"foo"
+				"foo",
 		});
 
 		verify(textView).setText("foo");
@@ -43,7 +44,7 @@ public class DotNetPipeTests {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TYPEFACE,
 				textView,
-				typeface
+				typeface,
 		});
 
 		verify(textView).setTypeface(typeface);
@@ -54,8 +55,7 @@ public class DotNetPipeTests {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT_SIZE,
 				textView,
-				22,
-				2.5f
+				22, 2.5f,
 		});
 
 		verify(textView).setTextSize(22, 2.5f);
@@ -139,6 +139,28 @@ public class DotNetPipeTests {
 	}
 
 	@Test
+	public void canSendTextView_Padding() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_PADDING,
+				textView,
+				1, 2, 3, 4,
+		});
+
+		verify(textView).setPadding(1, 2, 3, 4);
+	}
+
+	@Test
+	public void canSendTextView_PaintFlags() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_PAINT_FLAGS,
+				textView,
+				Paint.STRIKE_THRU_TEXT_FLAG,
+		});
+
+		verify(textView).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+	}
+
+	@Test
 	public void canSendTextView_EveryProperty() {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
@@ -151,8 +173,7 @@ public class DotNetPipeTests {
 
 				DotNetPipe.TEXTVIEW_TEXT_SIZE,
 				textView,
-				22,
-				2.5f,
+				22, 2.5f,
 
 				DotNetPipe.TEXTVIEW_TEXT_COLOR,
 				textView,
@@ -181,6 +202,14 @@ public class DotNetPipeTests {
 				DotNetPipe.TEXTVIEW_ELLIPSIZE,
 				textView,
 				TextUtils.TruncateAt.MIDDLE,
+
+				DotNetPipe.TEXTVIEW_PADDING,
+				textView,
+				1, 2, 3, 4,
+
+				DotNetPipe.TEXTVIEW_PAINT_FLAGS,
+				textView,
+				Paint.STRIKE_THRU_TEXT_FLAG,
 		});
 
 		verify(textView).setText("foo");
@@ -193,5 +222,7 @@ public class DotNetPipeTests {
 		verify(textView).setSingleLine(true);
 		verify(textView).setMaxLines(2222);
 		verify(textView).setEllipsize(TextUtils.TruncateAt.MIDDLE);
+		verify(textView).setPadding(1, 2, 3, 4);
+		verify(textView).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 	}
 }
