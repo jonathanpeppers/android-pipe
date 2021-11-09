@@ -8,6 +8,7 @@
     <ApplicationId>com.microsoft.benchmarks</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
   <ItemGroup>
     <Using Include="Android.Runtime" />
@@ -16,6 +17,7 @@
     <Using Include="BenchmarkDotNet.Attributes" />
     <Using Include="BenchmarkDotNet.Configs" />
     <Using Include="BenchmarkDotNet.Exporters" />
+    <Using Include="BenchmarkDotNet.Jobs" />
     <Using Include="BenchmarkDotNet.Loggers" />
     <Using Include="BenchmarkDotNet.Running" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />

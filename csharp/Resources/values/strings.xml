@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Benchmarks</string>
-    <string name="app_text">Hello, Android!</string>
+    <string name="app_text">See logcat, benchmarks running.</string>
 </resources>
