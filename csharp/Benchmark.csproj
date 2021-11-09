@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.microsoft.benchmarks</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="Android.Runtime" />
+    <Using Include="Android.Util" />
+    <Using Include="BenchmarkDotNet.Analysers" />
+    <Using Include="BenchmarkDotNet.Attributes" />
+    <Using Include="BenchmarkDotNet.Configs" />
+    <Using Include="BenchmarkDotNet.Exporters" />
+    <Using Include="BenchmarkDotNet.Loggers" />
+    <Using Include="BenchmarkDotNet.Running" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+    <None Remove="@(None->WithMetadataValue('Extension', '.dll'))" />
+  </ItemGroup>
+</Project>
