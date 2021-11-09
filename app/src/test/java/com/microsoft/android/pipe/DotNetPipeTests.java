@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.TextUtils;
+import android.util.LayoutDirection;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -172,6 +173,28 @@ public class DotNetPipeTests {
 	}
 
 	@Test
+	public void canSendTextView_LayoutDirection() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_LAYOUT_DIRECTION,
+				textView,
+				LayoutDirection.INHERIT,
+		});
+
+		verify(textView).setLayoutDirection(LayoutDirection.INHERIT);
+	}
+
+	@Test
+	public void canSendTextView_TextDirection() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_TEXT_DIRECTION,
+				textView,
+				View.LAYOUT_DIRECTION_RTL,
+		});
+
+		verify(textView).setTextDirection(View.LAYOUT_DIRECTION_RTL);
+	}
+
+	@Test
 	public void canSendTextView_EveryProperty() {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
@@ -225,6 +248,14 @@ public class DotNetPipeTests {
 				DotNetPipe.TEXTVIEW_LINE_SPACING,
 				textView,
 				300f, 400f,
+
+				DotNetPipe.TEXTVIEW_LAYOUT_DIRECTION,
+				textView,
+				LayoutDirection.INHERIT,
+
+				DotNetPipe.TEXTVIEW_TEXT_DIRECTION,
+				textView,
+				View.LAYOUT_DIRECTION_RTL,
 		});
 
 		verify(textView).setText("foo");
@@ -240,5 +271,7 @@ public class DotNetPipeTests {
 		verify(textView).setPadding(1, 2, 3, 4);
 		verify(textView).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 		verify(textView).setLineSpacing(300f, 400f);
+		verify(textView).setLayoutDirection(LayoutDirection.INHERIT);
+		verify(textView).setTextDirection(View.LAYOUT_DIRECTION_RTL);
 	}
 }

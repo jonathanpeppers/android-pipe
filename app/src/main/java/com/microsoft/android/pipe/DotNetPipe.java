@@ -20,6 +20,8 @@ public class DotNetPipe {
 	public final static int TEXTVIEW_PADDING = 11;
 	public final static int TEXTVIEW_PAINT_FLAGS = 12;
 	public final static int TEXTVIEW_LINE_SPACING = 13;
+	public final static int TEXTVIEW_LAYOUT_DIRECTION = 14;
+	public final static int TEXTVIEW_TEXT_DIRECTION = 15;
 
 	public static void Send (Object[] message) {
 		int messageId;
@@ -64,6 +66,12 @@ public class DotNetPipe {
 			} else if (messageId == TEXTVIEW_LINE_SPACING) {
 				getTextView(message, i).setLineSpacing((float) message[i + 2], (float) message[i + 3]);
 				i += 4;
+			} else if (messageId == TEXTVIEW_LAYOUT_DIRECTION) {
+				getTextView(message, i).setLayoutDirection((int) message[i + 2]);
+				i += 3;
+			} else if (messageId == TEXTVIEW_TEXT_DIRECTION) {
+				getTextView(message, i).setTextDirection((int) message[i + 2]);
+				i += 3;
 			} else {
 				// Assume unknown messages of size 3
 				i += 3;
