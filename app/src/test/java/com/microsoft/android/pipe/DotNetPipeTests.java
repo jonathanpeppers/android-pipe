@@ -161,6 +161,17 @@ public class DotNetPipeTests {
 	}
 
 	@Test
+	public void canSendTextView_LineSpacing() {
+		DotNetPipe.Send(new Object[] {
+				DotNetPipe.TEXTVIEW_LINE_SPACING,
+				textView,
+				300f, 400f,
+		});
+
+		verify(textView).setLineSpacing(300f, 400f);
+	}
+
+	@Test
 	public void canSendTextView_EveryProperty() {
 		DotNetPipe.Send(new Object[] {
 				DotNetPipe.TEXTVIEW_TEXT,
@@ -210,6 +221,10 @@ public class DotNetPipeTests {
 				DotNetPipe.TEXTVIEW_PAINT_FLAGS,
 				textView,
 				Paint.STRIKE_THRU_TEXT_FLAG,
+
+				DotNetPipe.TEXTVIEW_LINE_SPACING,
+				textView,
+				300f, 400f,
 		});
 
 		verify(textView).setText("foo");
@@ -224,5 +239,6 @@ public class DotNetPipeTests {
 		verify(textView).setEllipsize(TextUtils.TruncateAt.MIDDLE);
 		verify(textView).setPadding(1, 2, 3, 4);
 		verify(textView).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+		verify(textView).setLineSpacing(300f, 400f);
 	}
 }
