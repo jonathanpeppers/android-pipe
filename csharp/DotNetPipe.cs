@@ -38,7 +38,7 @@ public class DotNetPipe
     }
 
     [Benchmark]
-    public unsafe void OneJNICall()
+    public void OneJNICall()
     {
         Com.Microsoft.Android.Pipe.DotNetPipe.SetTextView(
             textView,
