@@ -27,7 +27,7 @@ public static void Send (TextView view, Object[] message) {
 }
 ```
 
-Should answer: we couldn't find a scenario it helped. It wast just
+Short answer: we couldn't find a scenario it helped. It wast just
 worse, due to the way we'd have to copy C# arrays to Java arrays.
 
 However!
