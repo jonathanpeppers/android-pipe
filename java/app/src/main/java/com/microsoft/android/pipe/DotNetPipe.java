@@ -82,4 +82,23 @@ public class DotNetPipe {
 			}
 		}
 	}
+
+	public static void setTextView(TextView view, String text, Typeface typeface, int textColor, int textSizeUnit, float textSize, float letterSpacing, int textAlignment, int gravity, boolean singleLine, int maxLines, TextUtils.TruncateAt ellipsize, int left, int right, int top, int bottom, int paintFlags, float add, float mult, int layoutDirection, int textDirection)
+	{
+		view.setText(text);
+		view.setTypeface(typeface);
+		view.setTextColor(textColor);
+		view.setTextSize(textSizeUnit, textSize);
+		view.setLetterSpacing(letterSpacing);
+		view.setTextAlignment(textAlignment);
+		view.setGravity(gravity);
+		view.setSingleLine(singleLine);
+		view.setMaxLines(maxLines);
+		view.setEllipsize(ellipsize);
+		view.setPadding(left, right, top, bottom);
+		view.setPaintFlags(paintFlags);
+		view.setLineSpacing(add, mult);
+		view.setLayoutDirection(layoutDirection);
+		view.setTextDirection(textDirection);
+	}
 }
