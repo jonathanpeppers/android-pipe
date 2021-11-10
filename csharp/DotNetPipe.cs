@@ -9,12 +9,25 @@ namespace Benchmark;
 [Orderer(SummaryOrderPolicy.FastestToSlowest)]
 public class DotNetPipe
 {
+    readonly TextView textView;
+    readonly Java.Lang.Object?[] parameters;
+    readonly IntPtr native_parameters;
+    readonly Typeface typeface = Typeface.Monospace!;
+
+    public DotNetPipe()
+    {
+        textView = new TextView(Application.Context);
+        parameters = new Java.Lang.Object[35];
+        native_parameters = JNIEnv.NewArray(parameters);
+
+        FillParameters();
+    }
+
     [Benchmark]
     public void CallFromCSharp()
     {
-        var textView = new TextView(Application.Context);
         textView.Text = "foo";
-        textView.Typeface = Typeface.Monospace;
+        textView.Typeface = typeface;
         textView.SetTextSize(ComplexUnitType.Pt, 12f);
         textView.SetTextColor(Color.Red);
         textView.LetterSpacing = 10f;
@@ -30,70 +43,71 @@ public class DotNetPipe
         textView.TextDirection = TextDirection.Rtl;
     }
 
-    readonly Java.Lang.Object[] parameters;
-    readonly IntPtr native_parameters;
-
-    public DotNetPipe()
-    {
-        parameters = new Java.Lang.Object[] {
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewText,
-            "foo",
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTypeface,
-            Typeface.Monospace,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextSize,
-            (int)ComplexUnitType.Pt, 12f,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextColor,
-            (int)Color.Red,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewLetterSpacing,
-            10f,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextAlignment,
-            (int)TextAlignment.Center,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewGravity,
-            (int)GravityFlags.Center,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewSingleLine,
-            true,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewMaxLines,
-            10,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewEllipsize,
-            Android.Text.TextUtils.TruncateAt.Middle,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewPadding,
-            1, 2, 3, 4,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewPaintFlags,
-            (int)PaintFlags.StrikeThruText,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewLineSpacing,
-            1f, 2f,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewLayoutDirection,
-            (int)LayoutDirection.Rtl,
-
-            Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextDirection,
-            (int)TextDirection.Rtl,
-        };
-
-        native_parameters = JNIEnv.NewArray(parameters);
-    }
-
     [Benchmark]
     public unsafe void CallWithPipe()
     {
-        var textView = new TextView(Application.Context);
+        // Uncomment to test refilling
+        //FillParameters();
+
         JniArgumentValue* arguments = stackalloc JniArgumentValue[2];
         arguments[0] = new JniArgumentValue(textView.Handle);
         arguments[1] = new JniArgumentValue(native_parameters);
         Send(arguments);
+    }
+
+    void FillParameters()
+    {
+        parameters[0] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewText;
+        parameters[1] = "foo";
+
+        parameters[2] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTypeface;
+        parameters[3] = typeface;
+
+        parameters[4] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextSize;
+        parameters[5] = (int)ComplexUnitType.Pt;
+        parameters[6] = 12f;
+
+        parameters[7] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextColor;
+        parameters[8] = (int)Color.Red;
+
+        parameters[9] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewLetterSpacing;
+        parameters[10] = 10f;
+
+        parameters[11] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextAlignment;
+        parameters[12] = (int)TextAlignment.Center;
+
+        parameters[13] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewGravity;
+        parameters[14] = (int)GravityFlags.Center;
+
+        parameters[15] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewSingleLine;
+        parameters[16] = true;
+
+        parameters[17] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewMaxLines;
+        parameters[18] = 10;
+
+        parameters[19] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewEllipsize;
+        parameters[20] = Android.Text.TextUtils.TruncateAt.Middle;
+
+        parameters[21] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewPadding;
+        parameters[22] = 1;
+        parameters[23] = 2;
+        parameters[24] = 3;
+        parameters[25] = 4;
+
+        parameters[26] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewPaintFlags;
+        parameters[27] = (int)PaintFlags.StrikeThruText;
+
+        parameters[28] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewLineSpacing;
+        parameters[29] = 1f;
+        parameters[30] = 2f;
+
+        parameters[31] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewLayoutDirection;
+        parameters[32] = (int)LayoutDirection.Rtl;
+
+        parameters[33] = Com.Microsoft.Android.Pipe.DotNetPipe.TextviewTextDirection;
+        parameters[34] = (int)TextDirection.Rtl;
+
+        JNIEnv.CopyArray(parameters, native_parameters);
     }
 
     static readonly JniPeerMembers Members = new Com.Microsoft.Android.Pipe.DotNetPipe().JniPeerMembers;
